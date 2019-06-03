@@ -1,6 +1,5 @@
 package pl.edu.ur.oopl5.companyAndEmployees.company;
 
-
 import pl.edu.ur.oopl5.companyAndEmployees.company.abstractClasses.AbstractCompany;
 import pl.edu.ur.oopl5.companyAndEmployees.employee.Employee;
 
@@ -8,22 +7,32 @@ import pl.edu.ur.oopl5.companyAndEmployees.employee.Employee;
  */
 public class Company extends AbstractCompany {
 
+    Employee[] tab = new Employee[100];
+    static int i = 0;
+
     public Company(int n) {
         super(n);
     }
 
     @Override
     public void addEmployee(Employee e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        tab[i] = e;
+        i++;
     }
 
     @Override
     public Employee[] getEmployees() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tab;
     }
 
     @Override
     public void printEmployees() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int j = 0; j <= i; j++) {
+            System.out.println(tab[j].getName());
+            System.out.println(tab[j].getSurname());
+            System.out.println(tab[j].getAge());
+            System.out.println(tab[j].getPosition());
+            System.out.println(i);
+        }
     }
 }

@@ -1,75 +1,49 @@
 package pl.edu.ur.oopl5.stack;
 
+import java.util.EmptyStackException;
 
-public class Stack {
-	private static int maxsize = 8;
+/**
+ */
+public class Stack extends AbstractStack {
 
-	private static int[] stack = new int[8];
+    private int[] s;
+    private int l = 0;
+    private int index = -1;
 
-	private static int top = -1;
+    public Stack(int i) {
+        this.s = new int[i];
+    }
 
-	public static boolean isempty() {
-		if(top == -1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public void push(int i) {
+        if ((s.length - 1) > index) {
+            index++;
+            l++;
+            s[index] = i;
+        } else {
+            throw new StackOverflowError();
+        }
+    }
 
-	public static boolean isfull() {
-		if(top == maxsize) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public int pop() {
+        if (!isEmpty()) {
+            int i = s[index];
+            index--;
+            l--;
+            return i;
+        } else {
+            throw new EmptyStackException();
+        }
+    }
 
-	public static int peek() {
-		return stack[top];
-	}
+    @Override
+    public boolean isEmpty() {
+        if (index == -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public static int pop() {
-		int data;
-
-		if(!isempty()) {
-			data = stack[top];
-			top = top - 1;
-			return data;
-		} else {
-			System.out.println("Could not retrieve data, Stack is empty.");
-		}
-		return 0;
-	}
-
-	public static int push(int data) {
-		if(!isfull()) {
-			top = top + 1;
-			stack[top] = data;
-		} else {
-			System.out.println("Could not insert data, Stack is full.");
-		}
-		return 0;
-	}
-
-	public static void main(String[] args) {
-		// push items on to the stack 
-		push(3);
-		push(5);
-		push(9);
-		push(1);
-		push(12);
-		push(15);
-
-		System.out.println("Element at top of the stack: " + peek());
-		System.out.println("Elements: ");
-
-		// print stack data 
-		while(!isempty()) {
-			int data = pop();
-			System.out.println(data);
-		}
-
-		System.out.println("Stack full: " + (isfull() ? "true" : "false"));
-		System.out.println("Stack empty: " + (isempty() ? "true" : "false"));
-	}
 }
